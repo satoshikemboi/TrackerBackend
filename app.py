@@ -1,4 +1,4 @@
-
+import os
 from flask import Flask
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
@@ -12,12 +12,12 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, origins=["https://your-frontend-domain.vercel.app"])
+    CORS(app, origins=["https://carbon-tracker-sand.vercel.app/"])
 
     # Config
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tracker.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = 'super-secret-key'  # 🔑 Change in production!
+    app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET_KEY", "fallback-secret-key")
 
     # Initialize extensions
     db.init_app(app)
