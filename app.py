@@ -12,7 +12,7 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, origins=["https://your-frontend-domain.vercel.app"])
 
     # Config
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tracker.db'
